@@ -1,0 +1,650 @@
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  outline: none;
+  box-sizing: border-box;
+  scrollbar-width: none;
+  color: #0C1D2E;
+  font-family: var(--font-dm-sans);
+  font-weight: 400;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+button {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+}
+
+.scrollable {
+  overflow-y: auto;
+  height: 100%;
+}
+
+.clickable {
+  cursor: pointer;
+  user-select: none;
+}
+
+.container {
+  width: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
+  position: relative;
+}
+
+.back-drop-filter {
+  background-color: rgba(255, 255, 255, 0.5);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+}
+
+.number-of-lines-1 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.number-of-lines-2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #a6aec3;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  display: block;
+}
+
+button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  text-align: inherit;
+  cursor: pointer;
+  display: flex;
+}
+
+span {
+  display: inline-block;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+svg {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+/* React Datepicker Customizations */
+.custom-datepicker-input {
+  width: 100%;
+  padding: 12px 20px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  font-size: 16px;
+  color: var(--main-dark);
+  background-color: var(--white-color);
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+.custom-datepicker-input::placeholder {
+  color: #a6aec3;
+}
+
+.custom-datepicker-input:focus {
+  outline: none;
+  border-color: var(--main-turquoise);
+}
+
+.react-datepicker-popper {
+  z-index: 10 !important;
+  /* Ensure it's above other elements */
+}
+
+/* Hide datepicker arrows/pointers */
+.react-datepicker__triangle {
+  display: none !important;
+}
+
+.react-datepicker-popper[data-placement^="bottom"] .react-datepicker__triangle,
+.react-datepicker-popper[data-placement^="top"] .react-datepicker__triangle,
+.react-datepicker-popper[data-placement^="left"] .react-datepicker__triangle,
+.react-datepicker-popper[data-placement^="right"] .react-datepicker__triangle {
+  display: none !important;
+}
+
+.react-datepicker__header {
+  background-color: var(--main-turquoise) !important;
+  border-bottom: none !important;
+}
+
+.react-datepicker__current-month,
+.react-datepicker-time__header,
+.react-datepicker__day-name {
+  color: var(--white-color) !important;
+  font-weight: var(--fw-semibold) !important;
+}
+
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected,
+.react-datepicker__time-list-item--selected {
+  background-color: var(--main-turquoise) !important;
+  color: var(--white-color) !important;
+}
+
+.react-datepicker__day--selected:hover,
+.react-datepicker__day--keyboard-selected:hover,
+.react-datepicker__time-list-item--selected:hover {
+  background-color: var(--main-dark) !important;
+}
+
+.react-datepicker__day:hover {
+  background-color: #e0f7f6 !important;
+  /* Light turquoise for hover */
+}
+
+/* RC Segmented Control Customizations */
+.modern-segmented-control {
+  background-color: #DCE2E7 !important;
+  /* OffColor equivalent */
+  border-radius: var(--border-radius) !important;
+  padding: 2px !important;
+  /* To create inner spacing for the handle effect */
+  border: 1px solid var(--border-color) !important;
+}
+
+.modern-segmented-control .rc-segmented-item {
+  font-family: var(--font-dm-sans) !important;
+  font-size: 14px !important;
+  font-weight: var(--fw-medium) !important;
+  color: var(--text-color) !important;
+  /* OffHandleColor equivalent */
+  border-radius: calc(var(--border-radius) - 2px) !important;
+  /* Slightly less than parent */
+  padding: 8px 15px !important;
+  transition: background-color 0.3s ease, color 0.3s ease !important;
+}
+
+.modern-segmented-control .rc-segmented-item-selected {
+  background-color: var(--main-turquoise) !important;
+  /* OnColor equivalent */
+  color: #FFFFFF !important;
+  /* OnHandleColor equivalent - Explicitly white */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+.modern-segmented-control .rc-segmented-item:hover:not(.rc-segmented-item-selected) {
+  background-color: #e9eff3 !important;
+  /* Lighter version of offColor for hover */
+  color: var(--main-dark) !important;
+}
+
+/* Optional: Style for disabled state if needed in the future */
+.modern-segmented-control .rc-segmented-item-disabled {
+  opacity: 0.6 !important;
+  cursor: not-allowed !important;
+}
+
+.rc-segmented-item-label[aria-selected="true"] {
+  color: white !important;
+}
+
+
+.datepicker-container {
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+  flex-direction: row; // Default direction
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 20px; // Optional: adjust gap for column layout
+  }
+}
+
+@media (min-width:450.01px) {
+  .Swiper-controller {
+    gap: 2rem;
+  }
+
+  .clickable-auto-width {
+    width: 150px !important;
+    height: 128px !important;
+    // gap: ;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(15deg);
+  }
+
+  50% {
+    transform: rotate(0deg);
+  }
+
+  75% {
+    transform: rotate(-15deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+// New animations for modern notification toast
+@keyframes slideInFromTop {
+  from {
+    opacity: 0;
+    transform: translateY(-100%) scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes slideOutToTop {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-100%) scale(0.95);
+  }
+}
+
+@keyframes gentleBounce {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  25% {
+    transform: translateY(-2px) rotate(5deg);
+  }
+
+  50% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  75% {
+    transform: translateY(-1px) rotate(-3deg);
+  }
+}
+
+@keyframes progressBar {
+  from {
+    width: 100%;
+  }
+
+  to {
+    width: 0%;
+  }
+}
+
+// Enhanced animations for the premium notification design
+@keyframes gradientShift {
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+
+  50% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
+
+  100% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+}
+
+// Sweep/Shimmer animation for cart icon (left to right)
+@keyframes shimmerSweep {
+  0% {
+    transform: translateX(-150%) skewX(-45deg);
+  }
+  100% {
+    transform: translateX(150%) skewX(-45deg);
+  }
+}
+
+.cart-icon-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.cart-icon-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: shimmerSweep 1.5s infinite;
+}
+
+// Moving gradient animation for main buttons (View Cart / Checkout)
+@keyframes moveGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.moving-gradient-btn {
+  background-size: 200% auto !important;
+  animation: moveGradient 12s linear infinite;
+}
+
+// / Loading spinner animation for notification toggle
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+// Coupon popup animations
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Responsive price-quantity container for very small screens */
+@media (max-width: 285px) {
+  .price-quantity-container {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+  }
+}
+
+/* Fix coupon section layout breaking on smaller screens */
+@media (max-width: 480px) {
+  .coupon-apply-container {
+    /* Keep same row layout as desktop but with better spacing */
+    flex-direction: row !important;
+    gap: 8px !important;
+    // align-items: flex-start !important;
+  }
+
+  .coupon-action-buttons {
+    /* Keep buttons in column layout */
+    flex-direction: column !important;
+    gap: 6px !important;
+    flex-shrink: 0 !important;
+    min-width: 60px !important;
+  }
+
+  .coupon-action-buttons button {
+    padding: 6px 8px !important;
+    font-size: 10px !important;
+    min-width: 50px !important;
+    max-width: 70px !important;
+    white-space: nowrap !important;
+    border-radius: 6px !important;
+  }
+
+  /* Ensure input container doesn't overflow */
+  .coupon-apply-container>div:first-child {
+    flex: 1 !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+  }
+}
+
+/* Fix popup font sizes for smaller devices */
+@media (max-width: 480px) {
+  .coupon-popup-container {
+    width: 95% !important;
+    margin: 10px !important;
+    border-radius: 12px !important;
+  }
+
+  .coupon-popup-header {
+    padding: 14px 16px !important;
+    border-radius: 12px 12px 0 0 !important;
+  }
+
+  .coupon-popup-header h3 {
+    font-size: 14px !important;
+  }
+
+  .coupon-popup-header p {
+    font-size: 10px !important;
+  }
+
+  .coupon-popup-content {
+    padding: 12px !important;
+  }
+
+  .coupon-item {
+    padding: 10px !important;
+    border-radius: 8px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .coupon-code {
+    font-size: 12px !important;
+    padding: 2px 4px !important;
+  }
+
+  .coupon-title {
+    font-size: 12px !important;
+    margin: 0 0 3px 0 !important;
+  }
+
+  .coupon-description {
+    font-size: 9px !important;
+    line-height: 1.2 !important;
+  }
+
+  /* Make coupon icon smaller on mobile */
+  .coupon-item .coupon-icon {
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  /* Make applied badge smaller */
+  .coupon-item .applied-badge {
+    font-size: 7px !important;
+    padding: 2px 4px !important;
+    top: 6px !important;
+    right: 6px !important;
+  }
+}
+
+/* Responsive OrderItem image heights */
+.order-item-image {
+  width: 25%;
+  object-fit: cover;
+  border-radius: 14px;
+  margin-right: 10px;
+  padding: 5px;
+
+  /* Small mobile devices (up to 480px) */
+  height: 70px;
+
+  /* Medium mobile devices (481px to 768px) */
+  @media (min-width: 481px) and (max-width: 768px) {
+    height: 85px;
+  }
+
+  /* iPad Mini and similar tablets (769px to 1024px) */
+  @media (min-width: 769px) and (max-width: 1024px) {
+    height: 100px;
+  }
+
+  /* Large devices (1025px and up) */
+  @media (min-width: 1025px) {
+    height: 120px;
+  }
+}
+
+/* Responsive ReviewItem layout for smaller mobile devices */
+@media (max-width: 480px) {
+  .reviewer-name {
+    font-size: 12px !important;
+    line-height: 1.3 !important;
+  }
+
+  .review-date-desktop {
+    display: none !important;
+  }
+
+  .review-date-mobile {
+    display: block !important;
+    font-size: 9px !important;
+    color: var(--text-color) !important;
+    opacity: 0.8;
+  }
+}
+
+/* For very small devices (320px and below) */
+@media (max-width: 320px) {
+  .reviewer-name {
+    font-size: 11px !important;
+  }
+
+  .review-date-mobile {
+    font-size: 8px !important;
+  }
+}
+
+/* Responsive Out of Stock text for ItemGrid */
+@media (max-width: 480px) {
+  .out-of-stock-text {
+    font-size: 8px !important;
+  }
+}
+
+/* For very small devices */
+@media (max-width: 320px) {
+  .out-of-stock-text {
+    font-size: 7px !important;
+  }
+}
+
+@import 'auth-modal';
+
+// Pulse animation for loading states
+@keyframes pulse-animation {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(0.9);
+    opacity: 0.7;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

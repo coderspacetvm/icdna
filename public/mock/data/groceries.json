@@ -1,0 +1,9 @@
+{
+  "category_id": 3,
+  "category_name": "Groceries",
+  "subcategories": [
+    { "id": 302, "name": "Fruits" },
+    { "id": 303, "name": "Grains" },
+    { "id": 304, "name": "Dairy" }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "category_id": 3,
+  "subcategories": [
+    { "id": 201, "name": "Tuna" },
+    { "id": 202, "name": "Salmon" }
+  ]
+}

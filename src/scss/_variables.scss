@@ -1,0 +1,30 @@
+:root {
+  --white-color: #fff;
+  --text-color: #748BA0;
+  --accent-color: #FA5555;
+
+  --main-dark: #00152a;
+  --main-color: #00b4cc;
+  --border-color: #eeeeee;
+  // --main-turquoise: #00B0B9;
+  --main-turquoise: #008f9f;
+
+  --header-height: 42px;
+  --footer-height: 70px;
+
+  --border-radius: 10px;
+  --screen-width: 650px;
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+}
+
+.main-dark {
+  color: var(--main-dark);
+}
+
+.main-color {
+  color: var(--main-color);
+}

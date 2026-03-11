@@ -1,0 +1,7 @@
+{
+  "category_id": 2,
+  "subcategories": [
+    { "id": 101, "name": "Beef" },
+    { "id": 102, "name": "Chicken" }
+  ]
+}

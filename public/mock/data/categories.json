@@ -1,0 +1,8 @@
+{
+  "categories": [
+    { "id": 1, "name": "Food", "image":"/mock/images/img_food.png" },
+    { "id": 2, "name": "Meat", "image":"/mock/images/img_meat.png" },
+    { "id": 3, "name": "Fish", "image":"/mock/images/img_fish.png" },
+    { "id": 4, "name": "Groceries", "image":"/mock/images/img_groceries.png" }
+  ]
+}

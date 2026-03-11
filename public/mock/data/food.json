@@ -1,0 +1,13 @@
+{
+  "category_id": 1,
+  "category_name": "Food",
+  "subcategories": [
+    { "id": 401, "name": "Snacks" },
+    { "id": 403, "name": "Dairy" },
+    { "id": 404, "name": "Frozen" },
+    { "id": 405, "name": "Bakery" },
+    { "id": 406, "name": "Canned" },
+    { "id": 407, "name": "Pasta" },
+    { "id": 408, "name": "Condiments" }
+  ]
+}
