@@ -16,6 +16,10 @@ const nextConfig: NextConfig = {
         hostname: 'lh3.googleusercontent.com',
       },
       {
+        protocol: 'https',
+        hostname: 'admin.jewelsandlooms.com',
+      },
+      {
         protocol: 'http',
         hostname: 'shopadmin.inygo.in',
       },

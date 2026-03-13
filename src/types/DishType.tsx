@@ -9,6 +9,7 @@ export type VariantExtended = Variants & {
   id: number;
   variant_values: any[];
   additional_images: string[];
+  additional_videos: string[];
   created_at: string;
   updated_at: string;
   last_edited_field: string | null;

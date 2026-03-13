@@ -43,6 +43,8 @@ import { NotificationCheckSvg } from './NotificationCheckSvg';
 import { BuildingSvg } from './BuildingSvg';
 import { MenuSvg } from './MenuSvg';
 import { LandmarkSvg } from './LandmarkSvg';
+import { ShareSvg } from './ShareSvg';
+import { DeliverySvg } from './DeliverySvg';
 
 import { HomeTabSvg } from './tabs/HomeTabSvg';
 import { BellTabSvg } from './tabs/BellTabSvg';
@@ -110,5 +112,7 @@ export const svg = {
   ForkSvg,
   BuildingSvg,
   LandmarkSvg,
+  ShareSvg,
+  DeliverySvg,
   MenuSvg
 };

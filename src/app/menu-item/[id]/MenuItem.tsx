@@ -26,6 +26,7 @@ import { createApiService } from '@/lib/axios/apiService';
 import { authClient } from '@/lib/axios/apiClient';
 import { urls } from '@/lib/config/urls';
 // import { Routes } from '@/routes';
+import { toast } from 'react-hot-toast';
 
 
 type Props = {
@@ -115,12 +116,34 @@ export const MenuItem: React.FC<Props> = ({ product }) => {
   const [removeLoading, setRemoveLoading] = useState(false)
   const [addCounterLoading, setAddCounterLoading] = useState(false)
   const isCounterLoading = removeLoading || addCounterLoading
+  const [showSplash, setShowSplash] = useState(false);
+  const [isWishlistLoading, setIsWishlistLoading] = useState(false);
   const router = useRouter()
 
   // const {updateWishlistWithItem} = hooks.useManageWishList()
   const { cart, addToCart, removeFromCart } = stores.useCartStore(); // Added cart
   const { wishlistedIds, toggleWishlistItem } = stores.useWishlistStore()
   const { goBack } = hooks.useNavigation()
+  const handleShare = async () => {
+    if (typeof window === 'undefined') return;
+
+    const shareData = {
+      title: product?.name || 'Check out this product!',
+      text: `Take a look at ${product?.name} at ICDNA`,
+      url: window.location.href,
+    };
+
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+      } else {
+        await navigator.clipboard.writeText(window.location.href);
+        toast.success('Link copied to clipboard!');
+      }
+    } catch (err) {
+      console.error('Error sharing:', err);
+    }
+  };
   const isInWishlist = wishlistedIds.includes(product?.id || 0);
 
   // Calculate quantity for the chosen variant directly instead of using state
@@ -193,17 +216,25 @@ export const MenuItem: React.FC<Props> = ({ product }) => {
   // };
 
   const renderImage = () => {
-    const images = choosenVarient.additional_images;
-    const hasMultipleImages = Array.isArray(images) && images.length > 1;
+    const images = choosenVarient.additional_images || [];
+    const videos = choosenVarient.additional_videos || [];
+
+    // Combine images and videos into a single media array (videos first)
+    const media = [
+      ...videos.map(url => ({ type: 'video' as const, url })),
+      ...images.map(url => ({ type: 'image' as const, url }))
+    ];
+
+    const hasMultipleItems = media.length > 1;
 
     return (
-      <>
-        {hasMultipleImages ? (
+      <div style={{ width: '100%', height: '100%', background: 'transparent' }}>
+        {hasMultipleItems ? (
           <Swiper
             modules={[Pagination, Autoplay]}
             slidesPerView={1}
             pagination={{ clickable: true }}
-            autoplay={{
+            autoplay={media.some(m => m.type === 'video') ? false : {
               delay: 3000,
               disableOnInteraction: false,
             }}
@@ -211,34 +242,73 @@ export const MenuItem: React.FC<Props> = ({ product }) => {
             style={{ width: '100%', height: '100%' }}
             className="menu-item-image-swiper" // For potential custom global Swiper styles
           >
-            {images.map((imgSrc, index) => (
-              <SwiperSlide key={index} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '10px', boxSizing: 'border-box' }}>
-                <div style={{ width: '100%', height: '100%', position: 'relative' }}>
-                  <Image
-                    src={imgSrc || itemPlaceholder}
-                    alt={`${product?.name || 'Product image'} ${index + 1}`}
-                    fill
-                    // objectFit="cover"
-                    style={{ objectFit: 'cover' }}
-                    sizes="(max-width: 765px) 100vw, 50vw" // Keep existing sizes or adjust as needed
-                  />
+            {media.map((item, index) => (
+              <SwiperSlide key={index} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '0', boxSizing: 'border-box', background: 'transparent' }}>
+                <div style={{ width: '100%', height: '100%', position: 'relative', border: 'none', background: 'transparent' }}>
+                  {item.type === 'image' ? (
+                    <Image
+                      src={item.url || itemPlaceholder}
+                      alt={`${product?.name || 'Product image'} ${index + 1}`}
+                      fill
+                      style={{ objectFit: 'cover', border: 'none' }}
+                      sizes="(max-width: 765px) 100vw, 50vw" // Keep existing sizes or adjust as needed
+                    />
+                  ) : (
+                    <video
+                      src={item.url}
+                      playsInline
+                      autoPlay
+                      muted
+                      loop
+                      style={{ width: '100%', height: '100%', objectFit: 'cover', border: 'none', backgroundColor: 'transparent' }}
+                    />
+                  )}
                 </div>
               </SwiperSlide>
             ))}
           </Swiper>
         ) : (
-          // Single image or placeholder
-          <div style={{ width: '100%', height: '100%', position: 'relative', padding: '10px', boxSizing: 'border-box', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <Image
-              src={(Array.isArray(images) && images.length === 1) ? images[0] : choosenVarient.additional_images[0] || itemPlaceholder}
-              // Fallback to choosenVarient.image_url if additional_images is empty/not array, then placeholder
-              alt={product?.name || 'Product image'}
-              layout="fill"
-              objectFit="cover"
-              sizes="(max-width: 758px) 100vw, 50vw"
-            />
+          // Single item or placeholder
+          <div style={{ width: '100%', height: '100%', position: 'relative', padding: '0', boxSizing: 'border-box', display: 'flex', justifyContent: 'center', alignItems: 'center', background: 'transparent', border: 'none' }}>
+            {media.length > 0 ? (
+              media[0].type === 'image' ? (
+                <Image
+                  src={media[0].url || itemPlaceholder}
+                  alt={product?.name || 'Product image'}
+                  layout="fill"
+                  objectFit="cover"
+                  style={{ border: 'none' }}
+                  sizes="(max-width: 758px) 100vw, 50vw"
+                />
+              ) : (
+                <video
+                  src={media[0].url}
+                  playsInline
+                  autoPlay
+                  muted
+                  loop
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', border: 'none', backgroundColor: 'transparent' }}
+                />
+              )
+            ) : (
+              <Image
+                src={itemPlaceholder}
+                alt={product?.name || 'Product image'}
+                layout="fill"
+                objectFit="cover"
+                style={{ border: 'none' }}
+                sizes="(max-width: 758px) 100vw, 50vw"
+              />
+            )}
           </div>
         )}
+      </div>
+    );
+  };
+
+  const renderFloatingButtons = () => {
+    return (
+      <>
         <button
           style={{
             position: 'absolute',
@@ -252,6 +322,7 @@ export const MenuItem: React.FC<Props> = ({ product }) => {
             borderRadius: '50%',
             backgroundColor: 'var(--page-background-color, #f0f0f0)',
             zIndex: 1,
+            pointerEvents: 'auto'
           }}
           onClick={(e) => {
             e.stopPropagation();
@@ -275,22 +346,54 @@ export const MenuItem: React.FC<Props> = ({ product }) => {
             borderRadius: '50%',
             backgroundColor: 'var(--page-background-color, #f0f0f0)',
             zIndex: 1,
+            pointerEvents: 'auto'
+          }}
+          onClick={async (e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            if (choosenVarient?.id != null) {
+              const newStatus = !isInWishlist;
+              setIsWishlistLoading(true);
+              await toggleWishlistItem(product?.id, choosenVarient?.id);
+              setIsWishlistLoading(false);
+              if (newStatus) {
+                setShowSplash(true);
+                setTimeout(() => setShowSplash(false), 500);
+              }
+            }
+          }}
+          disabled={isWishlistLoading}
+        >
+          {showSplash && <div className="heart-splash-circle" />}
+          <div className={showSplash ? 'heart-pop-animation' : ''} style={{ display: 'flex', zIndex: 1, opacity: isWishlistLoading ? 0.7 : 1 }}>
+            <svg.HeartBigSvg flag={isInWishlist} isLoading={isWishlistLoading} />
+          </div>
+        </button>
+
+        <button
+          style={{
+            position: 'absolute',
+            top: 75,
+            right: 23,
+            width: 40,
+            height: 40,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            borderRadius: '50%',
+            backgroundColor: 'var(--page-background-color, #f0f0f0)',
+            zIndex: 1,
+            pointerEvents: 'auto'
           }}
           onClick={(e) => {
             e.stopPropagation();
             e.preventDefault();
-            // choosenVarient is guaranteed to be defined here due to the early return.
-            // Add a check for id just in case, though VariantExtended should always have an id.
-            if (choosenVarient?.id != null) {
-              toggleWishlistItem(product?.id, choosenVarient?.id);
-            } else {
-              console.warn("Cannot toggle wishlist: Chosen Variant ID is missing for product", product?.id);
-            }
+            handleShare();
           }}
         >
-          <svg.HeartBigSvg flag={isInWishlist} />
+          <svg.ShareSvg />
         </button>
-      </> // Closing the fragment
+      </>
     );
   };
 
@@ -390,10 +493,10 @@ export const MenuItem: React.FC<Props> = ({ product }) => {
           }}
         >
           <div>
-            <div style={{ display: "flex", gap: "5px" }}>
+            <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
               <span
                 style={{
-                  fontSize: "20px",
+                  fontSize: "22px",
                   fontWeight: "var(--fw-bold)",
                   fontFamily: "DM Sans",
                 }}
@@ -401,15 +504,30 @@ export const MenuItem: React.FC<Props> = ({ product }) => {
                 ₹{choosenVarient.sale_price}
               </span>
               {choosenVarient.mrp && choosenVarient.mrp > choosenVarient.sale_price && (
-                <span
-                  style={{
-                    color: "#868686",
-                    textDecoration: "line-through",
-                    fontSize: "20px",
-                  }}
-                >
-                  ₹{choosenVarient.mrp}
-                </span>
+                <>
+                  <span
+                    style={{
+                      color: "#868686",
+                      textDecoration: "line-through",
+                      fontSize: "18px",
+                    }}
+                  >
+                    ₹{choosenVarient.mrp}
+                  </span>
+                  <span
+                    style={{
+                      color: "#15803d",
+                      fontSize: "12px",
+                      fontWeight: "800",
+                      backgroundColor: "#f0fdf4",
+                      padding: "2px 8px",
+                      borderRadius: "6px",
+                      border: "1px solid #bcf0da"
+                    }}
+                  >
+                    {choosenVarient.discount_percentage}% OFF
+                  </span>
+                </>
               )}
             </div>
           </div>
@@ -636,15 +754,19 @@ export const MenuItem: React.FC<Props> = ({ product }) => {
         }}
       >
         {/* Image Section */}
-        <components.ImageZoom
-          src={choosenVarient?.additional_images?.[0] || ''}
-          height='clamp(260px, 33vh, 350px)'
-          zoom={8}
-          boxSize={130}
-          offset={15}
-        >
-          {renderImage()}
-        </components.ImageZoom>
+        <div style={{ position: 'relative' }}>
+          <components.ImageZoom
+            src={choosenVarient?.additional_images?.[0] || ''}
+            height='clamp(260px, 33vh, 350px)'
+            zoom={8}
+            boxSize={130}
+            offset={15}
+            containerStyle={{ backgroundColor: 'transparent' }}
+          >
+            {renderImage()}
+          </components.ImageZoom>
+          {renderFloatingButtons()}
+        </div>
 
         {/* Content Section */}
         <div
@@ -690,7 +812,23 @@ export const MenuItem: React.FC<Props> = ({ product }) => {
                 padding: '12px 16px',
               }}
             >
-              <span style={{ fontSize: '20px' }}>🚚</span>
+              <div 
+                style={{ 
+                  backgroundColor: 'var(--main-turquoise)', 
+                  width: '32px', 
+                  height: '32px', 
+                  borderRadius: '50%', 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center',
+                  color: 'white',
+                  flexShrink: 0
+                }}
+              >
+                <div className="delivery-move-animation" style={{ display: 'flex' }}>
+                  <svg.DeliverySvg />
+                </div>
+              </div>
               <div>
                 <span
                   style={{

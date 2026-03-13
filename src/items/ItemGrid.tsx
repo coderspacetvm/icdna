@@ -202,9 +202,7 @@ export const ItemGrid: React.FC<Props> = ({ item, isLoading }) => {
           onClick={handleWishlistAction}
           disabled={isWishlistLoading}
         >
-          <div style={isWishlistLoading ? { animation: 'pulse-animation 1s infinite ease-in-out' } : {}}>
-            <svg.HeartSvg flag={isInWishlist} />
-          </div>
+          <svg.HeartSvg flag={isInWishlist} isLoading={isWishlistLoading} />
         </button>
 
         {/* Content below the image */}
