@@ -31,6 +31,10 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'shopadmin.inygo.in',
       },
+      {
+        protocol: 'https',
+        hostname: 'admin.jewelsandlooms.com',
+      },
     ],
   },
 
