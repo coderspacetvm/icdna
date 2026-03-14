@@ -163,7 +163,7 @@ export const MenuView: React.FC = memo(() => {
             height: '100%',
           }}
         >
-          <span className='t16'>No dishes found for "{search}"</span>
+          <span className='t16'>No items found for "{search}"</span>
         </section>
       );
     }
@@ -179,7 +179,7 @@ export const MenuView: React.FC = memo(() => {
             height: '100%',
           }}
         >
-          <span className='t16'>No dishes available.</span>
+          <span className='t16'>No items available.</span>
         </section>
       );
     }

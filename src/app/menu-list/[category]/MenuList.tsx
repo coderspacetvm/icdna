@@ -148,7 +148,7 @@ export const MenuList: React.FC<Props> = ({ category, category_id }) => {
             padding: '20px',
           }}
         >
-          <span className='t16'>No dishes available.</span>
+          <span className='t16'>No items available.</span>
         </section>
       );
     }
@@ -186,7 +186,7 @@ export const MenuList: React.FC<Props> = ({ category, category_id }) => {
               padding: '20px',
             }}
           >
-            <span className='t16'>No dishes found for "{search}"</span>
+            <span className='t16'>No items found for "{search}"</span>
           </section>
         );
       } else {
@@ -201,7 +201,7 @@ export const MenuList: React.FC<Props> = ({ category, category_id }) => {
               padding: '20px',
             }}
           >
-            <span className='t16'>No dishes available.</span>
+            <span className='t16'>No items available.</span>
           </section>
         );
       }
