@@ -416,18 +416,37 @@ export const Home: React.FC = React.memo(() => {
             return (
               <SwiperSlide key={banner.id}>
                 <Link href={`${Routes.MENU_ITEM}/${dishIdForLink}`}>
-                  <Image
-                    src={banner.image}
-                    alt='Banner'
-                    width={0}
-                    height={0}
-                    sizes='100vw'
-                    priority={true}
-                    className='clickable'
-                    style={{ width: '100%', height: 'auto', borderRadius: '10px' }} // Added borderRadius
-                  />
+                  <div 
+                    style={{ 
+                      width: '100%', 
+                      aspectRatio: '2/1', 
+                      borderRadius: '10px', 
+                      overflow: 'hidden',
+                      position: 'relative'
+                    }}
+                  >
+                    <Image
+                      src={banner.image}
+                      alt='Banner'
+                      fill
+                      priority={true}
+                      className='clickable'
+                      style={{ 
+                        objectFit: 'cover',
+                        objectPosition: 'center',
+                        transition: 'transform 0.5s ease'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'scale(1.1)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'scale(1.0)';
+                      }}
+                    />
+                  </div>
                 </Link>
               </SwiperSlide>
+
             );
           })}
         </Swiper>
