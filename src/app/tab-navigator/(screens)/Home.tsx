@@ -490,6 +490,7 @@ export const Home: React.FC = React.memo(() => {
           title='Recommended for you'
           className='container'
           containerStyle={{ marginBottom: 14 }}
+          href={Routes.ALL_PRODUCTS}
         />
         {dishesLoading ? (
           <ul

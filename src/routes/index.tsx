@@ -36,5 +36,6 @@ export enum Routes {
   FORGOT_PASSWORD_SENT_EMAIL = '/forgot-password-sent-email',
   SUPPORT_CENTER = '/support-center',
   CATEGORIES = '/categories',
+  ALL_PRODUCTS = '/all-products',
   TOPUP_WALLET = '/topup-wallet',
 }
